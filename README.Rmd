@@ -19,9 +19,9 @@ RとGitおよびGitHubを結びつけるパッケージ
 
 ## Rパッケージ
 
-* **`{git2r}`**
-* **`{github}`**
-* **`{gistr}`**
+* [**`{git2r}`**](https://github.com/ropensci/git2r)
+* [**`{github}`**](https://github.com/cscheid/rgithub)
+* [**`{gistr}`**](https://github.com/ropensci/gistr)
 
 ## 作業の流れ
 
