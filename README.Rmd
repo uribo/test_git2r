@@ -1,0 +1,97 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+RとGitおよびGitHubを結びつけるパッケージ
+=====
+
+## Rパッケージ
+
+* **`{git2r}`**
+* **`{github}`**
+* **`{gistr}`**
+
+## 作業の流れ
+
+### gitリポジトリを作成
+
+1. **`{git2r}`**あるいはRStudioの新規プロジェクト作成機能で**ローカル**
+2. GitHub
+
+```{r}
+library(git2r)
+(getwd())
+```
+
+```{r, eval = FALSE, echo = TRUE}
+# 既存のディレクトリ内にリポジトリを新規作成
+init(path = getwd(), bare = FALSE)
+r <- git2r::repository(getwd())
+```
+
+```{r, eval = FALSE}
+library(github)
+# リモートリポジトリをGitHub上に作成
+res <- github::create.repository(name = "test_git2r", 
+                          description = "test R and Git, GitHub integration", 
+                          private = FALSE)
+# $ok
+# [1] TRUE
+# 
+# $content
+# $content$id
+# [1] 49580376
+# 
+# $content$name
+# [1] "test_git2r"
+# 
+# $content$full_name
+# [1] "uribo/test_git2r"
+```
+
+```{r, eval = FALSE}
+# リモートリポジトリに指定
+remotes(r)
+# character(0)
+
+remote_add(repo = r, name = "origin", url = res$content$clone_url)
+remotes(r)
+# [1] "origin"
+```
+
+一旦RStudioを再起動してgitパネルを有効化する。
+
+```{r, eval = FALSE}
+# .gitignore ファイルの編集
+devtools::source_gist(id = "b9cf68217c596369721a")
+add_ignore()
+status(r)
+# Untracked files:
+# 	Untracked:  .gitignore
+# 	Untracked:  README.Rmd
+# 	Untracked:  README.md
+# 	Untracked:  test_git2r.Rproj
+
+# コミット
+```
+
+
+
+
+
+```{r, eval=FALSE}
+rmarkdown::render("README.Rmd", output_format = "md_document")
+```
+
