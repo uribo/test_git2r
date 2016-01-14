@@ -144,7 +144,7 @@ git2r::branches(r, flags = "local")
 # ファイルをコミットする
 git2r::add(r, list.files(pattern = "^README"))
 git2r::commit(r, message = "Upgrade README\nCreate branch")
-git2r::push(r, "origin", "refs/heads/master", credentials = cred)
+git2r::push(r, "origin", "refs/heads/test/create_branch", credentials = cred)
 ```
 
 
