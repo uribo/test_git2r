@@ -148,8 +148,8 @@ git2r::fetch(r, name = "origin", credentials = cred)
 pull(r, credentials = cred)
 ```
 
-GitHub isssuesの活用
---------------------
+GitHub issuesの活用
+-------------------
 
 ref) <https://github.com/Cucurbitaceae/cucumber-flesh/issues/1>
 
