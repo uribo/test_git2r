@@ -19,10 +19,10 @@ RとGitおよびGitHubを結びつけるパッケージ
 
 ## Rパッケージ
 
-* [**`{git2r}`**](https://github.com/ropensci/git2r)
-* [**`{github}`**](https://github.com/cscheid/rgithub)
-* [**`{gistr}`**](https://github.com/ropensci/gistr)
-* [**`{gh}`**](https://github.com/gaborcsardi/gh)
+* [**`{git2r}`**](https://github.com/ropensci/git2r)... Rを通じて主要なGit操作を可能にするパッケージ。内部ではC言語で実装された[libgit2](https://libgit2.github.com)を利用している。 
+* [**`{github}`**](https://github.com/cscheid/rgithub)... GitHub APIラッパーパッケージその１
+* [**`{gistr}`**](https://github.com/ropensci/gistr)... gist管理
+* [**`{gh}`**](https://github.com/gaborcsardi/gh)... GitHub APIラッパーパッケージその２。Hadleyが **`{devtools}`**と相互性を持たせようとしていて、未来が明るい感じがある (https://github.com/gaborcsardi/gh/issues/30)
 
 ## 作業の流れ
 
@@ -88,7 +88,6 @@ status(r)
 # 	Untracked:  README.md
 # 	Untracked:  test_git2r.Rproj
 
-remoji::emoji(alias = "hatching_chick")
 add(r, list.files(all.files = TRUE, recursive = TRUE))
 status(r)
 # Staged changes:
@@ -231,5 +230,20 @@ gh(endpoint = "GET /users/:username/repos", username = "uribo")
 ```
 
 ```{r, eval=FALSE}
+headers <- httr::add_headers(Accept = "application/vnd.github.v3+json",
+                  Authorization = paste("token", Sys.getenv("GITHUB_TOKEN")))
+
+GET("https://api.github.com/users/uribo",
+    config = headers)
+
+# POST("https://api.github.com/repos/Cucurbitaceae/cucumber-flesh/issues",
+#      body = list(title = "Create issue from R using {httr}",
+#                  body = ":package: {httr}パッケージだけでissueをPOSTするテスト"),
+#      config = headers,
+#      encode = "json")
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
 rmarkdown::render("README.Rmd", output_format = "md_document")
 ```
