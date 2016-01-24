@@ -157,6 +157,21 @@ gh::gh("PUT /repos/:owner/:repo/pulls/:number/merge",
        commit_message = "{gh}パッケージからmerge! :muscle:")
 ```
 
+### ブランチの削除
+
+> git branch -d <branchname>
+
+``` r
+git2r::branches(r, flags = "local")
+# $master
+# [dbd077] (Local) (HEAD) master
+# 
+# $`test/create_branch`
+# [f4607c] (Local) test/create_branch
+# うまくいかない?
+git2r::branch_delete("test/create_branch")
+```
+
 ### リモートリポジトリの変更を反映させる
 
 プルリクエストにより、リモートリポジトリに変更が加えられた場合、ローカルリポジトリとの間に差が生じる。そのため更新情報をリモートリポジトリに反映させる必要がある。
